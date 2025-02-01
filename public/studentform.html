@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainee Registration Form</title>
+    <link rel="stylesheet" href="studentform.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Trainee Registration Form</h2>
+                <p>Please fill in all the required information accurately</p>
+            </div>
+
+            <form id="registrationForm" onsubmit="handleSubmit(event)">
+                <!-- Training Details Section -->
+                <div class="form-section">
+                    <h3>Training Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="trainingPartner">Training Partner</label>
+                            <input type="text" id="trainingPartner" name="trainingPartner" value="Medha XL" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseName">Name of the Course *</label>
+                            <input type="text" id="courseName" name="courseName" required>
+                            <span class="error" id="courseNameError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Details Section -->
+                <div class="form-section">
+                    <h3>Personal Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="candidateName">Name of the Candidate (As Per SSC) *</label>
+                            <input type="text" id="candidateName" name="candidateName" required>
+                            <span class="error" id="candidateNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname of the Trainee *</label>
+                            <input type="text" id="surname" name="surname" required>
+                            <span class="error" id="surnameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender *</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error" id="genderError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input type="date" id="dob" name="dob" required onchange="calculateAge()">
+                            <span class="error" id="dobError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" id="age" name="age" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="religion">Religion *</label>
+                            <select id="religion" name="religion" required>
+                                <option value="">Select Religion</option>
+                                <option value="hindu">Hindu</option>
+                                <option value="muslim">Muslim</option>
+                                <option value="christian">Christian</option>
+                                <option value="sikh">Sikh</option>
+                                <option value="buddhist">Buddhist</option>
+                                <option value="jain">Jain</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error" id="religionError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" required onchange="updateSubCategory()">
+                                <option value="">Select Category</option>
+                                <option value="general">General</option>
+                                <option value="sc">SC</option>
+                                <option value="st">ST</option>
+                                <option value="obc">OBC</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error" id="categoryError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subCategory">Sub Category</label>
+                            <select id="subCategory" name="subCategory">
+                                <option value="">Select Sub Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number *</label>
+                            <input type="tel" id="mobile" name="mobile" maxlength="10" required>
+                            <span class="error" id="mobileError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status *</label>
+                            <select id="maritalStatus" name="maritalStatus" required>
+                                <option value="">Select Marital Status</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                            <span class="error" id="maritalStatusError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="bloodGroup">Blood Group *</label>
+                            <select id="bloodGroup" name="bloodGroup" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                            <span class="error" id="bloodGroupError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail ID *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error" id="emailError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Educational Details Section -->
+                <div class="form-section">
+                    <h3>Educational Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="minQualification">Minimum Qualification *</label>
+                            <select id="minQualification" name="minQualification" required>
+                                <option value="">Select Qualification</option>
+                                <option value="10th">10th</option>
+                                <option value="12th">10+2</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="iti">I.T.I</option>
+                            </select>
+                            <span class="error" id="minQualificationError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearPassing">Year of Passing Qualifying Exam *</label>
+                            <select id="yearPassing" name="yearPassing" required>
+                            </select>
+                            <span class="error" id="yearPassingError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="highestQualification">Highest Qualification *</label>
+                            <select id="highestQualification" name="highestQualification" required>
+                                <option value="">Select Qualification</option>
+                                <option value="degree">Degree</option>
+                                <option value="btech">B.Tech</option>
+                                <option value="phd">PhD</option>
+                            </select>
+                            <span class="error" id="highestQualificationError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="physicallyHandicapped">Physically Handicapped *</label>
+                            <select id="physicallyHandicapped" name="physicallyHandicapped" required>
+                                <option value="">Select</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                            <span class="error" id="physicallyHandicappedError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guardian Details Section -->
+                <div class="form-section">
+                    <h3>Guardian Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="guardianName">Father's / Mother's / Guardian's Name *</label>
+                            <input type="text" id="guardianName" name="guardianName" required>
+                            <span class="error" id="guardianNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="guardianOccupation">Father's / Mother's / Guardian's Occupation *</label>
+                            <input type="text" id="guardianOccupation" name="guardianOccupation" required>
+                            <span class="error" id="guardianOccupationError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="guardianContact">Father's / Mother's / Guardian's Contact No *</label>
+                            <input type="tel" id="guardianContact" name="guardianContact" maxlength="10" required>
+                            <span class="error" id="guardianContactError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="guardianIncome">Father's / Mother's / Guardian's Annual Income *</label>
+                            <input type="number" id="guardianIncome" name="guardianIncome" required>
+                            <span class="error" id="guardianIncomeError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Details Section -->
+                <div class="form-section">
+                    <h3>Address Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="doorNo">D.No / Locality *</label>
+                            <input type="text" id="doorNo" name="doorNo" required>
+                            <span class="error" id="doorNoError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="village">Village / Town *</label>
+                            <input type="text" id="village" name="village" required>
+                            <span class="error" id="villageError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mandal">Mandal / Tahasil *</label>
+                            <input type="text" id="mandal" name="mandal" required>
+                            <span class="error" id="mandalError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Pin Code *</label>
+                            <input type="text" id="pincode" name="pincode" maxlength="6" required onchange="fetchLocationDetails()">
+                            <span class="error" id="pincodeError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="district">District</label>
+                            <input type="text" id="district" name="district" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Identity Details Section -->
+                <div class="form-section">
+                    <h3>Identity Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="aadhar">Aadhar Number (Copy to be Submitted) *</label>
+                            <input type="text" id="aadhar" name="aadhar" maxlength="12" required>
+                            <span class="error" id="aadharError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit">Submit Registration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="studentform.js"></script>
+</body>
+</html>
