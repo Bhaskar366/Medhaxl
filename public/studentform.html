@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trainee Registration Form</title>
-    <link rel="stylesheet" href="studentform.css">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="assets/css/studentform.css">
 </head>
 <body>
     <div class="container">
         <div class="form-card">
             <div class="form-header">
-                <h2>Trainee Registration Form</h2>
-                <p>Please fill in all the required information accurately</p>
+                <h2>Student Registration</h2>
+                <p>Please fill in all the required information</p>
             </div>
 
             <form id="registrationForm" onsubmit="handleSubmit(event)">
@@ -24,9 +24,18 @@
                             <input type="text" id="trainingPartner" name="trainingPartner" value="Medha XL" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="courseName">Name of the Course *</label>
-                            <input type="text" id="courseName" name="courseName" required>
-                            <span class="error" id="courseNameError"></span>
+                            <label for="course">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                                Course *
+                            </label>
+                            <select id="course" name="course" required>
+                                <option value="">Select Course</option>
+                                <option value="JAVA FULL STACK">JAVA FULL STACK</option>
+                                <option value="PYTHON">PYTHON</option>
+                                <option value="WEB DESIGNING">WEB DESIGNING</option>
+                                <option value="DIGITAL MARKETING">DIGITAL MARKETING</option>
+                            </select>
+                            <span class="error" id="courseError"></span>
                         </div>
                     </div>
                 </div>
@@ -36,7 +45,7 @@
                     <h3>Personal Details</h3>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="candidateName">Name of the Candidate (As Per SSC) *</label>
+                            <label for="candidateName">Name of the Trainee (As Per SSC) *</label>
                             <input type="text" id="candidateName" name="candidateName" required>
                             <span class="error" id="candidateNameError"></span>
                         </div>
@@ -113,8 +122,8 @@
                             <span class="error" id="maritalStatusError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="bloodGroup">Blood Group *</label>
-                            <select id="bloodGroup" name="bloodGroup" required>
+                            <label for="bloodGroup">Blood Group </label>
+                            <select id="bloodGroup" name="bloodGroup">
                                 <option value="">Select Blood Group</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
@@ -252,13 +261,31 @@
                     </div>
                 </div>
 
-                <!-- Submit Button -->
+                <!-- Preview and Submit Buttons -->
                 <div class="form-actions">
-                    <button type="submit">Submit Registration</button>
+                    <button type="button" onclick="previewForm()" id="previewBtn">Preview</button>
+                    <button type="submit" id="submitBtn" style="display: none;">Submit Registration</button>
                 </div>
             </form>
+
+            <!-- Preview Modal -->
+            <div id="previewModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Application Preview</h2>
+                        <span class="close" onclick="closePreview()">&times;</span>
+                    </div>
+                    <div class="modal-body" id="previewContent">
+                        <!-- Preview content will be inserted here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closePreview()" class="secondary-button">Edit</button>
+                        <button onclick="confirmSubmission()" class="primary-button">Submit Registration</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="studentform.js"></script>
+    <script src="assets/js/studentform.js"></script>
 </body>
 </html>

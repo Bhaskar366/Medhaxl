@@ -44,7 +44,7 @@ function updateSubCategory() {
     const subCategories = {
         'sc': ['A', 'B', 'C', 'D'],
         'st': ['Tribal', 'Non-Tribal'],
-        'obc': ['A', 'B', 'C'],
+        'obc': ['A', 'B', 'C', 'D'],
         'general': ['EWS', 'Others']
     };
     
@@ -145,19 +145,123 @@ function validateForm() {
     return isValid;
 }
 
-// Handle form submission
+function previewForm() {
+    if (!validateForm()) {
+        return;
+    }
+
+    const formData = {
+        studentName: document.getElementById('studentName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        qualification: document.getElementById('qualification').value,
+        branch: document.getElementById('branch').value,
+        cgpa: document.getElementById('cgpa').value,
+        course: document.getElementById('course').value,
+        dob: document.getElementById('dob').value,
+        aadhar: document.getElementById('aadhar').value,
+        parentName: document.getElementById('parentName').value,
+        parentMobile: document.getElementById('parentMobile').value
+    };
+
+    const previewContent = document.getElementById('previewContent');
+    previewContent.innerHTML = `
+        <div class="preview-section">
+            <h3>Student Details</h3>
+            <div class="preview-item">
+                <div class="preview-label">Student Name</div>
+                <div class="preview-value">${formData.studentName}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Phone Number</div>
+                <div class="preview-value">${formData.phone}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Email ID</div>
+                <div class="preview-value">${formData.email}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Qualification</div>
+                <div class="preview-value">${formData.qualification}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Branch</div>
+                <div class="preview-value">${formData.branch}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">CGPA/Percentage</div>
+                <div class="preview-value">${formData.cgpa}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Course</div>
+                <div class="preview-value">${formData.course}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Date of Birth</div>
+                <div class="preview-value">${formData.dob}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Aadhar Number</div>
+                <div class="preview-value">${formData.aadhar}</div>
+            </div>
+        </div>
+        <div class="preview-section">
+            <h3>Parent Details</h3>
+            <div class="preview-item">
+                <div class="preview-label">Parent Name</div>
+                <div class="preview-value">${formData.parentName}</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-label">Parent Mobile Number</div>
+                <div class="preview-value">${formData.parentMobile}</div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('previewModal').style.display = 'block';
+}
+
+function closePreview() {
+    document.getElementById('previewModal').style.display = 'none';
+}
+
+function confirmSubmission() {
+    closePreview();
+    document.getElementById('previewBtn').style.display = 'none';
+    document.getElementById('submitBtn').style.display = 'block';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('previewModal');
+    if (event.target === modal) {
+        closePreview();
+    }
+}
+
 function handleSubmit(event) {
     event.preventDefault();
     
     if (validateForm()) {
-        const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData.entries());
-        console.log('Form submitted:', data);
+        const formData = {
+            studentName: document.getElementById('studentName').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            qualification: document.getElementById('qualification').value,
+            branch: document.getElementById('branch').value,
+            cgpa: document.getElementById('cgpa').value,
+            course: document.getElementById('course').value,
+            dob: document.getElementById('dob').value,
+            aadhar: document.getElementById('aadhar').value,
+            parentName: document.getElementById('parentName').value,
+            parentMobile: document.getElementById('parentMobile').value
+        };
+
+        console.log('Form submitted:', formData);
         alert('Registration successful!');
         event.target.reset();
-        document.getElementById('age').value = '';
-        document.getElementById('district').value = '';
-        document.getElementById('state').value = '';
+        document.getElementById('previewBtn').style.display = 'block';
+        document.getElementById('submitBtn').style.display = 'none';
     }
 }
 
