@@ -158,6 +158,11 @@ button {
     background-color: var(--primary-color);
     color: var(--white);
 }
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
 
 .btn-preview:hover {
     background-color: var(--primary-dark);
