@@ -7,27 +7,30 @@
     <link rel="stylesheet" href="assets/css/studentform.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-card">
+    <div class="page-container">
+        <div class="logo-container">
+            <img src="assets/img/Medhalogo.png" alt="MedhaXL Logo" class="logo">
+        </div>
+        
+        <div class="form-container">
             <div class="form-header">
-                <h2>Student Registration</h2>
-                <p>Please fill in all the required information</p>
+                <h1>Student Registration</h1>
+                <p>Please fill in all the required information carefully</p>
             </div>
 
             <form id="registrationForm" onsubmit="handleSubmit(event)">
                 <!-- Training Details Section -->
                 <div class="form-section">
-                    <h3>Training Details</h3>
+                    <div class="section-header">
+                        <h2>Training Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="trainingPartner">Training Partner</label>
-                            <input type="text" id="trainingPartner" name="trainingPartner" value="Medha XL" readonly>
+                            <input type="text" id="trainingPartner" name="trainingPartner" value="Medha XL" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
-                            <label for="course">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                                Course *
-                            </label>
+                            <label for="course">Course *</label>
                             <select id="course" name="course" required>
                                 <option value="">Select Course</option>
                                 <option value="JAVA FULL STACK">JAVA FULL STACK</option>
@@ -42,7 +45,9 @@
 
                 <!-- Personal Details Section -->
                 <div class="form-section">
-                    <h3>Personal Details</h3>
+                    <div class="section-header">
+                        <h2>Personal Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="candidateName">Name of the Trainee (As Per SSC) *</label>
@@ -71,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <label for="age">Age</label>
-                            <input type="text" id="age" name="age" readonly>
+                            <input type="text" id="age" name="age" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
                             <label for="religion">Religion *</label>
@@ -122,7 +127,7 @@
                             <span class="error" id="maritalStatusError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="bloodGroup">Blood Group </label>
+                            <label for="bloodGroup">Blood Group</label>
                             <select id="bloodGroup" name="bloodGroup">
                                 <option value="">Select Blood Group</option>
                                 <option value="A+">A+</option>
@@ -134,7 +139,6 @@
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                             </select>
-                            <span class="error" id="bloodGroupError"></span>
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail ID *</label>
@@ -146,7 +150,9 @@
 
                 <!-- Educational Details Section -->
                 <div class="form-section">
-                    <h3>Educational Details</h3>
+                    <div class="section-header">
+                        <h2>Educational Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="minQualification">Minimum Qualification *</label>
@@ -189,7 +195,9 @@
 
                 <!-- Guardian Details Section -->
                 <div class="form-section">
-                    <h3>Guardian Details</h3>
+                    <div class="section-header">
+                        <h2>Guardian Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="guardianName">Father's / Mother's / Guardian's Name *</label>
@@ -216,7 +224,9 @@
 
                 <!-- Address Details Section -->
                 <div class="form-section">
-                    <h3>Address Details</h3>
+                    <div class="section-header">
+                        <h2>Address Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="doorNo">D.No / Locality *</label>
@@ -240,18 +250,20 @@
                         </div>
                         <div class="form-group">
                             <label for="district">District</label>
-                            <input type="text" id="district" name="district" readonly>
+                            <input type="text" id="district" name="district" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" id="state" name="state" readonly>
+                            <input type="text" id="state" name="state" readonly class="readonly-input">
                         </div>
                     </div>
                 </div>
 
                 <!-- Identity Details Section -->
                 <div class="form-section">
-                    <h3>Identity Details</h3>
+                    <div class="section-header">
+                        <h2>Identity Details</h2>
+                    </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="aadhar">Aadhar Number (Copy to be Submitted) *</label>
@@ -261,31 +273,36 @@
                     </div>
                 </div>
 
-                <!-- Preview and Submit Buttons -->
+                <!-- Form Actions -->
                 <div class="form-actions">
-                    <button type="button" onclick="previewForm()" id="previewBtn">Preview</button>
-                    <button type="submit" id="submitBtn" style="display: none;">Submit Registration</button>
+                    <button type="button" class="btn-preview" onclick="previewForm()" id="previewBtn">
+                        Preview Application
+                    </button>
+                    <button type="submit" class="btn-submit" id="submitBtn" style="display: none;">
+                        Submit Registration
+                    </button>
                 </div>
             </form>
+        </div>
+    </div>
 
-            <!-- Preview Modal -->
-            <div id="previewModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Application Preview</h2>
-                        <span class="close" onclick="closePreview()">&times;</span>
-                    </div>
-                    <div class="modal-body" id="previewContent">
-                        <!-- Preview content will be inserted here -->
-                    </div>
-                    <div class="modal-footer">
-                        <button onclick="closePreview()" class="secondary-button">Edit</button>
-                        <button onclick="confirmSubmission()" class="primary-button">Submit Registration</button>
-                    </div>
-                </div>
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Application Preview</h2>
+                <button class="close-button" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body" id="previewContent">
+                <!-- Preview content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button onclick="closePreview()" class="btn-secondary">Edit</button>
+                <button onclick="confirmSubmission()" class="btn-primary">Submit Registration</button>
             </div>
         </div>
     </div>
+
     <script src="assets/js/studentform.js"></script>
 </body>
 </html>

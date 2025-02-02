@@ -150,74 +150,51 @@ function previewForm() {
         return;
     }
 
-    const formData = {
-        studentName: document.getElementById('studentName').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        qualification: document.getElementById('qualification').value,
-        branch: document.getElementById('branch').value,
-        cgpa: document.getElementById('cgpa').value,
-        course: document.getElementById('course').value,
-        dob: document.getElementById('dob').value,
-        aadhar: document.getElementById('aadhar').value,
-        parentName: document.getElementById('parentName').value,
-        parentMobile: document.getElementById('parentMobile').value
+    const form = document.getElementById('registrationForm');
+    const formData = new FormData(form);
+    let previewHTML = '';
+
+    // Group form data by sections
+    const sections = {
+        'Training Details': ['trainingPartner', 'course'],
+        'Personal Details': ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email'],
+        'Educational Details': ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped'],
+        'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
+        'Address Details': ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state'],
+        'Identity Details': ['aadhar']
     };
 
-    const previewContent = document.getElementById('previewContent');
-    previewContent.innerHTML = `
-        <div class="preview-section">
-            <h3>Student Details</h3>
-            <div class="preview-item">
-                <div class="preview-label">Student Name</div>
-                <div class="preview-value">${formData.studentName}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Phone Number</div>
-                <div class="preview-value">${formData.phone}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Email ID</div>
-                <div class="preview-value">${formData.email}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Qualification</div>
-                <div class="preview-value">${formData.qualification}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Branch</div>
-                <div class="preview-value">${formData.branch}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">CGPA/Percentage</div>
-                <div class="preview-value">${formData.cgpa}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Course</div>
-                <div class="preview-value">${formData.course}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Date of Birth</div>
-                <div class="preview-value">${formData.dob}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Aadhar Number</div>
-                <div class="preview-value">${formData.aadhar}</div>
-            </div>
-        </div>
-        <div class="preview-section">
-            <h3>Parent Details</h3>
-            <div class="preview-item">
-                <div class="preview-label">Parent Name</div>
-                <div class="preview-value">${formData.parentName}</div>
-            </div>
-            <div class="preview-item">
-                <div class="preview-label">Parent Mobile Number</div>
-                <div class="preview-value">${formData.parentMobile}</div>
-            </div>
-        </div>
-    `;
+    // Generate preview HTML
+    for (const [section, fields] of Object.entries(sections)) {
+        previewHTML += `
+            <div class="preview-section">
+                <h3>${section}</h3>
+                <div class="preview-grid">
+        `;
 
+        fields.forEach(field => {
+            const element = document.getElementById(field);
+            const value = element.type === 'select-one' ? 
+                element.options[element.selectedIndex]?.text : 
+                element.value;
+
+            if (value) {
+                previewHTML += `
+                    <div class="preview-item">
+                        <div class="preview-label">${element.previousElementSibling.textContent.replace(' *', '')}</div>
+                        <div class="preview-value">${value}</div>
+                    </div>
+                `;
+            }
+        });
+
+        previewHTML += `
+                </div>
+            </div>
+        `;
+    }
+
+    document.getElementById('previewContent').innerHTML = previewHTML;
     document.getElementById('previewModal').style.display = 'block';
 }
 
@@ -231,35 +208,23 @@ function confirmSubmission() {
     document.getElementById('submitBtn').style.display = 'block';
 }
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('previewModal');
-    if (event.target === modal) {
-        closePreview();
-    }
-}
-
+// Handle form submission
 function handleSubmit(event) {
     event.preventDefault();
     
     if (validateForm()) {
-        const formData = {
-            studentName: document.getElementById('studentName').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
-            qualification: document.getElementById('qualification').value,
-            branch: document.getElementById('branch').value,
-            cgpa: document.getElementById('cgpa').value,
-            course: document.getElementById('course').value,
-            dob: document.getElementById('dob').value,
-            aadhar: document.getElementById('aadhar').value,
-            parentName: document.getElementById('parentName').value,
-            parentMobile: document.getElementById('parentMobile').value
-        };
+        const form = document.getElementById('registrationForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-        console.log('Form submitted:', formData);
+        // Here you would typically send the data to your server
+        console.log('Form submitted:', data);
+        
+        // Show success message
         alert('Registration successful!');
-        event.target.reset();
+        
+        // Reset form
+        form.reset();
         document.getElementById('previewBtn').style.display = 'block';
         document.getElementById('submitBtn').style.display = 'none';
     }
@@ -280,3 +245,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('previewModal');
+    if (event.target === modal) {
+        closePreview();
+    } }
