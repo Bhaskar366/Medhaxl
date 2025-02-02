@@ -158,6 +158,7 @@ button {
     background-color: var(--primary-color);
     color: var(--white);
 }
+
 .preview-item {
     display: flex;
     justify-content: space-between;
