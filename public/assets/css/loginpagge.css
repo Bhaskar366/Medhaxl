@@ -163,8 +163,8 @@ input:focus {
 }
 
 .overlay {
-    background: #512da8;
-    background: linear-gradient(145deg, #512da8, #ffab2b);
+    background: #512da8, ;
+    background: linear-gradient(250deg, #512da8, #ffab2b);
     color: #fff;
     position: relative;
     left: -100%;
